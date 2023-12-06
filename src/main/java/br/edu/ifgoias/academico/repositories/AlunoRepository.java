@@ -7,5 +7,5 @@ import br.edu.ifgoias.academico.entities.Aluno;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Integer>{
-
+	//teste: fazer um inject 
 }

@@ -34,14 +34,14 @@ public class CursoService {
 	
 	public Curso update (Integer id, Curso obj_alterado) {
 		return cursoRep.findById(id).map(
-											cursoDB -> {
-													cursoDB.setNomecurso( obj_alterado.getNomecurso() );
-													return cursoRep.save(cursoDB);
-											}
-									)
-									.orElseThrow( 
-											() -> new ResponseStatusException(HttpStatus.NOT_FOUND) 
-									);
+			cursoDB -> {
+					cursoDB.setNomecurso( obj_alterado.getNomecurso() );
+					return cursoRep.save(cursoDB);
+			}
+	)
+	.orElseThrow( 
+			() -> new ResponseStatusException(HttpStatus.NOT_FOUND) 
+	);
 	}
 	
 
