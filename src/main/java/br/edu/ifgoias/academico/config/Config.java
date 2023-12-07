@@ -23,6 +23,8 @@ public class Config implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		System.out.println("Run config OK");
+		
 		// Curso c1 = new Curso(null,"Teste1");
 
 				// Curso c2 = new Curso(null,"Teste2");
@@ -35,11 +37,11 @@ public class Config implements CommandLineRunner {
 
 				// cursoRep.deleteById(8);
 
-				System.out.println("Qtde Cursos: " + cursoRep.count());
+				//System.out.println("Qtde Cursos: " + cursoRep.count());
 
-				Aluno a1 = new Aluno(null, "Caroline", "Feminino", Date.valueOf("2000-04-24"));
+				//Aluno a1 = new Aluno(null, "Caroline", "Feminino", Date.valueOf("2000-04-24"));
 
-				Aluno a2 = new Aluno(null, "Isabelle", "Feminino", Date.valueOf("2000-12-28"));
+				//Aluno a2 = new Aluno(null, "Isabelle", "Feminino", Date.valueOf("2000-12-28"));
 
 				//alunoRep.save(a1);
 
@@ -49,7 +51,7 @@ public class Config implements CommandLineRunner {
 
 				// alunoRep.deleteById(2);
 
-				System.out.println("Qtde Alunos: " + alunoRep.count());
+				//System.out.println("Qtde Alunos: " + alunoRep.count());
 	}
 
 }

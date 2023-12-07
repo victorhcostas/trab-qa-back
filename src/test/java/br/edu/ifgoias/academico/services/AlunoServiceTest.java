@@ -21,14 +21,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifgoias.academico.entities.Aluno;
 import br.edu.ifgoias.academico.repositories.AlunoRepository;
 
 @SpringBootTest
+@ActiveProfiles("test")
+@AutoConfigureTestDatabase(replace =  AutoConfigureTestDatabase.Replace.NONE)
 @ExtendWith(MockitoExtension.class)
 public class AlunoServiceTest {
 	
