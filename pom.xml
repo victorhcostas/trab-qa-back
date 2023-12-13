@@ -84,7 +84,7 @@
 				  <outputDirectory>target/my-reports</outputDirectory>
 				</configuration>
 			    </execution>
-			  </exceptions>
+			  </executions>
 			</plugin>
 		</plugins>
 	</build>
