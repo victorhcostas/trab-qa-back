@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.edu.ifgoias</groupId>
-	<artifactId>sistema-academico</artifactId>
+	<artifactId>trab-qa-back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>academico</name>
 	<description>Sistema WebService RestFull</description>
