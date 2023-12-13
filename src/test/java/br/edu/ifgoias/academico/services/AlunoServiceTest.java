@@ -117,6 +117,7 @@ public class AlunoServiceTest {
     @Test
     @DisplayName("Testando Update")
     public void testUpdate() {
+    	//O plano eh nao usar esse teste
         // Mocking the dependencies
         //AlunoRepository repository = mock(AlunoRepository.class);
 
