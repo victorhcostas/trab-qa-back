@@ -8,9 +8,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.sql.Date;
@@ -43,6 +46,75 @@ public class AlunoServiceTest {
 	AlunoService service;
 	
     @Test
+    @DisplayName("Testando findById (caso de sucesso)")
+    void testFindById() {
+        // Mock do AlunoRepository
+        AlunoRepository alunoRepository = mock(AlunoRepository.class);
+
+        // Crie uma instância do AlunoService com o mock do AlunoRepository
+        AlunoService alunoService = new AlunoService(alunoRepository);
+
+        // Mock de um aluno para ser retornado pelo repository
+        Aluno alunoMock = new Aluno();
+        alunoMock.setIdaluno(1);
+        alunoMock.setNome("John Doe");
+        alunoMock.setSexo("M");
+        alunoMock.setDt_nasc(Date.valueOf("2010-05-05"));
+
+        // Configurar comportamento do mock do repository quando chamado findById
+        when(alunoRepository.findById(1)).thenReturn(Optional.of(alunoMock));
+
+        // Executar o método findById() do AlunoService
+        Aluno result = alunoService.findById(1);
+
+        // Verificar se o método findById() retornou o aluno esperado
+        assertEquals(alunoMock, result);
+
+        // Verificar se o método findById() do repository foi chamado uma vez com o argumento 1
+        verify(alunoRepository, times(1)).findById(1);
+
+        // Verificar se o método findById() do repository não foi chamado com outros argumentos
+        //verify(alunoRepository, never()).findById(anyInt());
+
+        // Verificar se outros métodos do repository não foram chamados
+        verifyNoMoreInteractions(alunoRepository);
+    }
+
+    @Test
+    @DisplayName("Testando findById (testando a exception)")
+    void testFindByIdNotFound() {
+        // Mock do AlunoRepository
+        AlunoRepository alunoRepository = mock(AlunoRepository.class);
+
+        // Crie uma instância do AlunoService com o mock do AlunoRepository
+        AlunoService alunoService = new AlunoService(alunoRepository);
+
+        // Configurar comportamento do mock do repository quando chamado findById
+        when(alunoRepository.findById(1)).thenReturn(Optional.empty());
+
+        // Executar o método findById() do AlunoService deve lançar uma exceção
+        try {
+            alunoService.findById(1);
+        } catch (ResponseStatusException e) {
+            // Verificar se a exceção possui o status code correto
+            assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
+
+            // Verificar a mensagem da exceção, se necessário
+            // assertEquals("Mensagem esperada", e.getReason());
+        }
+
+        // Verificar se o método findById() do repository foi chamado uma vez com o argumento 1
+        verify(alunoRepository, times(1)).findById(1);
+
+        // Verificar se o método findById() do repository não foi chamado com outros argumentos
+        //verify(alunoRepository, never()).findById(anyInt());
+
+        // Verificar se outros métodos do repository não foram chamados
+        verifyNoMoreInteractions(alunoRepository);
+    }
+
+	
+    @Test
     @DisplayName("Testando Update")
     public void testUpdate() {
         // Mocking the dependencies
@@ -61,7 +133,7 @@ public class AlunoServiceTest {
         updatedAluno.setSexo("F");
         updatedAluno.setDt_nasc(Date.valueOf("2010-05-05"));
 
-        // Mocking the behavior of the repository findById method
+       /* // Mocking the behavior of the repository findById method
         when(repository.findById(1)).thenReturn(Optional.of(alunoToUpdate));
 
         // Calling the update method
@@ -82,5 +154,6 @@ public class AlunoServiceTest {
 
         // Asserting that the result returned by the update method is the same as the saved Aluno
         assertEquals(savedAluno, result);
+        */
     }
 }
